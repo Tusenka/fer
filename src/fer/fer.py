@@ -106,9 +106,10 @@ class FER(object):
             self.__face_detector = cv2.CascadeClassifier(cascade_file)
 
         # Local Keras model
-        emotion_model = pkg_resources.resource_filename(
-            "fer", "data/emotion_model.hdf5"
-        )
+        if not emotion_model:
+            emotion_model = pkg_resources.resource_filename(
+                "fer", "data/emotion_model.hdf5"
+            )
         self.config = tf.compat.v1.ConfigProto(log_device_placement=False)
         self.config.gpu_options.allow_growth = True
 
